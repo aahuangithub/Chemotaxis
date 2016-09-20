@@ -1,6 +1,6 @@
 Bacteria[] all = new Bacteria[100];
 int[] food = new int[2];
-
+int frame = 0;
 void setup()   
  {     
  	size (800, 800);
@@ -15,8 +15,9 @@ void setup()
  	for (int i = 0; i<all.length; i++)
  	{
  		all[i].display();
- 		all[i].update();
+ 		all[i].move();
  	}
+ frame++;
  }
 
  class Bacteria    
@@ -36,10 +37,17 @@ void setup()
  	}
  	void update()
  	{
- 		this.x = this.x + (int)((Math.random()*111)-55);
- 		this.y = this.y + (int)((Math.random()*111)-55);
+    //if frame is 60*15 then kill or multiply
  	}
-
+  void kill()
+  {
+    //gives a random chance to die depending on distance away from food
+  }
+  void move()
+  {
+     this.x = this.x + (int)((Math.random()*111)-55);
+     this.y = this.y + (int)((Math.random()*111)-55);
+  }
  }    
 
  void mousePressed()
