@@ -1,15 +1,15 @@
 Bacteria[] all = new Bacteria[100];
 Food one = new Food(-1, -1);
-int frame, gen;
+int gen;
 void setup()   
  {     
- 	frame = gen = 0;
+ 	gen = 0;
  	frameRate(60);
  	noStroke();
  	size (800, 800);
  	for (int i = 0; i<all.length; i++)
  	{
- 		all[i] = new Bacteria(400, 400);
+ 		all[i] = new Bacteria(i, 400, 400);
  	}
  }   
  void draw()   
@@ -24,36 +24,37 @@ void setup()
  	one.display();
  	fill(255, 0, 0);
  	text(gen, width-22, height-22);
- 	frame++;
+ 	
  }
 
  class Bacteria    
  {     
- 	int x, y;
+ 	int x, y, id, maxLength;
+ 	float rot;
  	boolean isAlive;
- 	color c;
- 	Bacteria(int x, int y)
+ 	Bacteria(int id, int x, int y)
  	{
  		this.x = x;
  		this.y = y;
  		this.isAlive = true;
- 		this.c = color((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
- 	} 
- 	void display()
+ 		this.id = id;
+ 		this.maxLength = (int)(Math.random()*51);
+ 		this.rot = (float)(Math.random()*TWO_PI);
+ 	}
+ void display()
  	{
  		if (this.isAlive)
  		{
- 			fill(this.c);
+ 			fill((255*(float)(this.id)/all.length), (int)(255*(float)this.maxLength/50), (int)(255*(this.rot/TWO_PI)));
  			ellipse(this.x, this.y, 10, 10);
  		}
  	}
  	void update(float dx, float dy)
  	{
  		float distance = sqrt(dx*dx+dy*dy);
-    	if(frame==180){
+    	if(frameCount%180 == 0){
     		//make the random chance to die here
 			gen++;
-			frame = 0;
     	}
    		if (distance>800){
 			this.isAlive=false;
