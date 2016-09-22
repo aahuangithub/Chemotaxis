@@ -1,3 +1,4 @@
+
 Bacteria[] all = new Bacteria[100];
 Food one = new Food(-1, -1);
 int gen;
@@ -38,32 +39,64 @@ void setup()
  		this.y = y;
  		this.isAlive = true;
  		this.id = id;
- 		this.maxLength = (int)(Math.random()*51);
+ 		this.maxLength = (int)(Math.random()*5);
  		this.rot = (float)(Math.random()*TWO_PI);
  	}
  void display()
  	{
  		if (this.isAlive)
  		{
+ 			stroke(0);
+ 			strokeWeight(3);
  			fill((255*(float)(this.id)/all.length), (int)(255*(float)this.maxLength/50), (int)(255*(this.rot/TWO_PI)));
- 			ellipse(this.x, this.y, 10, 10);
+ 			ellipse(this.x, this.y, 20, 20);
+ 			noFill();
+ 			arc (this.x, this.y, 30, 30, this.rot, this.rot+PI);
+ 			noStroke();
  		}
  	}
  	void update(float dx, float dy)
  	{
  		float distance = sqrt(dx*dx+dy*dy);
-    	if(frameCount%180 == 0){
+    	if(frameCount%120 == 0){
     		//make the random chance to die here
+    		if(distance>800)
+    		{
+    			this.isAlive=false;
+    		}
+    		else if(distance>400 && distance<800)
+    		{
+    			if (Math.random()<0.75)
+    			{
+    				this.isAlive=false;
+    			}
+    		}
+    		else if(distance>200 && distance<400)
+    		{
+    			if (Math.random()<0.5)
+    			{
+    				this.isAlive=false;
+    			}
+    		}
+    		else
+    		{
+    			if (this.isAlive){
+    				if (Math.random()<0.25){
+    					this.isAlive=true;
+    				}
+    			}
+    			
+    		}
+    		if(this.isAlive){
+    			//add another one of itself to the array but with slightly different things except id
+    		}
 			gen++;
     	}
-   		if (distance>800){
-			this.isAlive=false;
-		}
  	}
   void move()
   {
-     this.x = this.x + (int)((Math.random()*25)-12);
-     this.y = this.y + (int)((Math.random()*25)-12);
+     this.x = this.x + (int)(((Math.random()*this.maxLength))*cos(this.rot+(float)(Math.random()*PI)));
+     this.y = this.y + (int)(((Math.random()*this.maxLength))*sin(this.rot+(float)(Math.random()*PI)));
   }
  }    
 
