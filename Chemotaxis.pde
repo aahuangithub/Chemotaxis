@@ -1,5 +1,5 @@
-
-Bacteria[] all = new Bacteria[100];
+import java.util.*;
+ArrayList all = new ArrayList();
 Food one = new Food(-1, -1);
 int gen;
 void setup()   
@@ -8,19 +8,20 @@ void setup()
  	frameRate(60);
  	noStroke();
  	size (800, 800);
- 	for (int i = 0; i<all.length; i++)
+ 	for (int i = 0; i<100; i++)
  	{
- 		all[i] = new Bacteria(i, 400, 400);
+ 		all.add(new Bacteria(i, 400, 400));
  	}
  }   
  void draw()   
  {    
  	background(255);
- 	for (int i = 0; i<all.length; i++)
+ 	for (int i = 0; i<all.size(); i++)			//change to iterate through all list
  	{
- 		all[i].display();
- 		all[i].move();
- 		all[i].update(abs(one.x-all[i].x), abs(one.y-all[i].y));
+ 		println(all.get(i));
+ 		//(all.get(i)).display();
+ 		//(all.get(i)).move();
+ 		//(all.get(i)).update(abs(one.x-all[i].x), abs(one.y-all[i].y));
  	}
  	one.display();
  	fill(255, 0, 0);
@@ -48,7 +49,7 @@ void setup()
  		{
  			stroke(0);
  			strokeWeight(3);
- 			fill((255*(float)(this.id)/all.length), (int)(255*(float)this.maxLength/50), (int)(255*(this.rot/TWO_PI)));
+ 			fill((255*(float)(this.id)/all.size()), (int)(255*(float)this.maxLength/50), (int)(255*(this.rot/TWO_PI)));
  			ellipse(this.x, this.y, 20, 20);
  			noFill();
  			arc (this.x, this.y, 30, 30, this.rot, this.rot+PI);
