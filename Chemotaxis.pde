@@ -1,11 +1,10 @@
 import java.util.*;
 ArrayList<Bacteria> all = new ArrayList<Bacteria>();
 Food one = new Food(-1, -1);
-int gen, arraySize;
+int arraySize;
 void setup()   
  {     
   noLoop();
- 	gen = 0;
  	frameRate(60);
  	noStroke();
  	size (800, 800);
@@ -26,7 +25,6 @@ void setup()
  	}
  	one.display();
  	fill(255, 0, 0);
- 	text(gen, width-22, height-22);
  }
 
  class Bacteria    
@@ -97,7 +95,6 @@ void setup()
               all.remove(this);
           }
     		}
-			gen++;
     	}
  	}
   void move()
