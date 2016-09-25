@@ -45,7 +45,12 @@ void setup()
     {
       this.rot = newRotate + (float)Math.random()*(HALF_PI*v*0.1)-(PI*v*0.1);
       this.maxLength = newLength + (int)(Math.random()*v*0.01*3);
+      if (v>1){
+        this.v = v+(int)(Math.random()*3)-1;
+      }
+      else{
       this.v = v;
+    }
     }
  	}
  void display()
@@ -64,6 +69,8 @@ void setup()
  	{
  		float distance = sqrt(dx*dx+dy*dy);
     	if(frameCount %120 == 119){
+      fill(0);
+      rect(0, 0, 800, 800);
     		//make the random chance to die here
     		if(distance>800 || (this.x>400 || this.x<0 || this.y>400 || this.y<0))
     		{
@@ -104,12 +111,10 @@ void setup()
          this.dx = this.x;
          this.dy = this.y;
      }
-     if(frameCount % 3 == 0)
-     {
+
        this.x += (int)(((Math.random()*this.maxLength))*cos(this.rot+(float)(Math.random()*PI)));
        this.y += (int)(((Math.random()*this.maxLength))*sin(this.rot+(float)(Math.random()*PI)));
-  
-     }
+
  }    
  }
 class Food
